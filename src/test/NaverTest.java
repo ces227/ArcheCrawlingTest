@@ -62,7 +62,7 @@ public class NaverTest {
             //공식 사이트 누르기
             webElement = driver.findElement(By.xpath("//*[@id=\"main_pack\"]/div[3]/div[2]/div[1]/div[2]/div[2]/dl[1]/dd[3]/a[1]"));
             webElement.click();
-            Thread.sleep(10000); //1초 기다리기
+            Thread.sleep(1000); //1초 기다리기
             
             /*
             //로그인 버튼 클릭
@@ -71,10 +71,11 @@ public class NaverTest {
             Thread.sleep(10000); //1초 기다리기
             */
 
+            //@@@여기서 오류
             //이벤트 로고 누르기
             webElement = driver.findElement(By.xpath("//*[@id=\"__4\"]/a"));
             webElement.click();
-            Thread.sleep(10000); //1초 기다리기
+            Thread.sleep(1000); //1초 기다리기
             
             //ifram 으로 전환
             driver.switchTo().frame(driver.findElement(By.id("eventFrame")));
