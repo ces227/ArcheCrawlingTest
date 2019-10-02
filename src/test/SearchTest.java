@@ -1,6 +1,7 @@
 package test;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -10,7 +11,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class SearchTest {
  
     public static void main(String[] args) {
-    	SearchTest selTest = new SearchTest();
+    	SearchTest selTest = new SearchTest("포하","NUI");
         selTest.crawl();
         
     }
@@ -29,7 +30,9 @@ public class SearchTest {
     //크롤링 할 URL
     private String base_url;
     
-    public SearchTest() {
+    public SearchTest() { }
+    
+    public SearchTest(String nickname,String server) {
         super();
  
         //System Property SetUp
@@ -38,18 +41,21 @@ public class SearchTest {
                 
         //Driver SetUp
          ChromeOptions options = new ChromeOptions();
-         /*
-          * 창 띄우지 않고 작업하기 
-         options.addArguments("headless");
-          */ 
          
+         //창 띄우지 않고 작업하기
+         options.addArguments("headless");
+         
+         //왜인지 모르겠지만 사이즈를 지정해줘야 headless로 했을때 오류가 안뜸..
+         options.addArguments("window-size=1920x1080");
+         
+         //뭔지모름
          options.setCapability("ignoreProtectedModeSettings", true);
+         
+         
          driver = new ChromeDriver(options);
         
         //처음 url
-        String searchKey="포하";
-        String server = "NUI";
-        base_url = "https://archeage.xlgames.com/search?dt=characters&keyword="+searchKey+"&subDt=&server="+server;
+        base_url = "https://archeage.xlgames.com/search?dt=characters&keyword="+nickname+"&subDt=&server="+server;
     }
  
     public void crawl() {
@@ -60,8 +66,11 @@ public class SearchTest {
  
             //첫번째로 찾은 캐릭터 누르기
             webElement = driver.findElement(By.className("lst"));
-            webElement.findElement(By.tagName("a"));
-            
+            webElement=webElement.findElement(By.tagName("a"));
+            System.out.println(webElement.getText());
+            webElement.click();
+            webElement=driver.findElement(By.className("score"));
+            System.out.println(webElement.getText());
        
             
     
