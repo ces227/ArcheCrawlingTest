@@ -62,15 +62,31 @@ public class NaverTest {
             //공식 사이트 누르기
             webElement = driver.findElement(By.xpath("//*[@id=\"main_pack\"]/div[3]/div[2]/div[1]/div[2]/div[2]/dl[1]/dd[3]/a[1]"));
             webElement.click();
-            Thread.sleep(1000); //1초 기다리기
+            Thread.sleep(10000); //1초 기다리기
             
             /*
             //로그인 버튼 클릭
-            webElement = driver.findElement(By.xpath("//*[@id=\"account_util\"]/div[1]/a"));
+             */
+            webElement = driver.findElement(By.xpath("//*[@id=\"__4\"]/a"));
             webElement.click();
-            Thread.sleep(10000); //1초 기다리기
-            */
+            Thread.sleep(1000); //1초 기다리기
 
+            //아이디 입력
+            String id="ces227@daum.net";
+            webElement = driver.findElement(By.id("id_field"));
+            webElement.sendKeys(id);
+            Thread.sleep(1000); //1초 기다리기
+            
+            //비밀번호 입력
+            String pw = "kalia!97";
+            webElement = driver.findElement(By.id("pw_field"));
+            webElement.sendKeys(pw);
+            
+            //로그인버튼 누르기
+            webElement = driver.findElement(By.id("loginButton"));
+            webElement.click();
+            Thread.sleep(1000); //1초 기다리기
+            
             //@@@여기서 오류
             //이벤트 로고 누르기
             webElement = driver.findElement(By.xpath("//*[@id=\"__4\"]/a"));
@@ -86,22 +102,6 @@ public class NaverTest {
             
             //확인버튼 누르기
             webElement = driver.findElement(By.id("okBtn"));
-            webElement.click();
-            Thread.sleep(1000); //1초 기다리기
-            
-            //아이디 입력
-            String id="ces227@daum.net";
-            webElement = driver.findElement(By.id("id_field"));
-            webElement.sendKeys(id);
-            Thread.sleep(1000); //1초 기다리기
-            
-            //비밀번호 입력
-            String pw = "kalia!97";
-            webElement = driver.findElement(By.id("pw_field"));
-            webElement.sendKeys(pw);
-            
-            //로그인버튼 누르기
-            webElement = driver.findElement(By.id("loginButton"));
             webElement.click();
             Thread.sleep(1000); //1초 기다리기
             

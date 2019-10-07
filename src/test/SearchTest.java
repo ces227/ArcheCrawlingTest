@@ -1,7 +1,8 @@
 package test;
 
+import java.util.List;
+
 import org.openqa.selenium.By;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -11,7 +12,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 public class SearchTest {
  
     public static void main(String[] args) {
-    	SearchTest selTest = new SearchTest("포하","NUI");
+    	SearchTest selTest = new SearchTest("코하","NUI");
         selTest.crawl();
         
     }
@@ -43,6 +44,9 @@ public class SearchTest {
          ChromeOptions options = new ChromeOptions();
          
          //창 띄우지 않고 작업하기
+         /*
+          * 
+          */
          options.addArguments("headless");
          
          //왜인지 모르겠지만 사이즈를 지정해줘야 headless로 했을때 오류가 안뜸..
@@ -50,6 +54,7 @@ public class SearchTest {
          
          //뭔지모름
          options.setCapability("ignoreProtectedModeSettings", true);
+         options.addArguments("disable-gpu");
          
          
          driver = new ChromeDriver(options);
@@ -66,14 +71,52 @@ public class SearchTest {
  
             //첫번째로 찾은 캐릭터 누르기
             webElement = driver.findElement(By.className("lst"));
-            webElement=webElement.findElement(By.tagName("a"));
-            System.out.println(webElement.getText());
+            webElement = webElement.findElement(By.tagName("a")); //lst 태그 안의 a 읽기
+            System.out.println(webElement.getText()); //클릭할 닉 가져오기
             webElement.click();
-            webElement=driver.findElement(By.className("score"));
-            System.out.println(webElement.getText());
-       
+
+            //장비 목록
+            System.out.println("@@장비목록@@");
+            List<WebElement> eq_txt=driver.findElements(By.className("eq_txt"));
+            for (int i = 0; i < eq_txt.size(); i++) {
+				System.out.println(eq_txt.get(i).getText());
+			}
             
-    
+            //왼쪽탭 
+            System.out.println("@@왼쪽탭@@");
+            webElement = driver.findElement(By.xpath("//*[@id=\"container-common\"]/div/div/div[3]/div[3]/div[1]"));
+            System.out.println(webElement.getText());
+ 
+            //오른쪽탭
+            //기본
+            System.out.println("@@오른쪽탭-기본@@");
+            webElement = driver.findElement(By.xpath("//*[@id=\"container-common\"]/div/div/div[3]/div[3]/div[2]/div[1]"));
+            System.out.println(webElement.getText());
+            
+            //공격
+            System.out.println("@@오른쪽탭-공격@@");
+            webElement=driver.findElement(By.xpath("//*[@id=\"container-common\"]/div/div/div[3]/div[3]/div[2]/ul/li[2]/a"));
+            webElement.click();
+            webElement = driver.findElement(By.xpath("//*[@id=\"container-common\"]/div/div/div[3]/div[3]/div[2]/div[2]"));
+            System.out.println(webElement.getText());
+
+            //방어
+            System.out.println("@@오른쪽탭-방어@@");
+            webElement=driver.findElement(By.xpath("//*[@id=\"container-common\"]/div/div/div[3]/div[3]/div[2]/ul/li[3]/a"));
+            webElement.click();
+            webElement = driver.findElement(By.xpath("//*[@id=\"container-common\"]/div/div/div[3]/div[3]/div[2]/div[3]"));
+            System.out.println(webElement.getText());
+
+            //회복
+            System.out.println("@@오른쪽탭-회복@@");
+            webElement=driver.findElement(By.xpath("//*[@id=\"container-common\"]/div/div/div[3]/div[3]/div[2]/ul/li[4]/a"));
+            webElement.click();
+            webElement = driver.findElement(By.xpath("//*[@id=\"container-common\"]/div/div/div[3]/div[3]/div[2]/div[4]"));
+            System.out.println(webElement.getText());
+           
+            
+            
+
         } catch (Exception e) {
             
             e.printStackTrace();
