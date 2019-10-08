@@ -1,5 +1,6 @@
 package test;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.openqa.selenium.By;
@@ -7,12 +8,13 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.interactions.Actions;
  
 //캐릭+서버로 검색
 public class SearchTest {
  
     public static void main(String[] args) {
-    	SearchTest selTest = new SearchTest("코하","NUI");
+    	SearchTest selTest = new SearchTest("포하","NUI");
         selTest.crawl();
         
     }
@@ -75,6 +77,7 @@ public class SearchTest {
             System.out.println(webElement.getText()); //클릭할 닉 가져오기
             webElement.click();
 
+             
             //장비 목록
             System.out.println("@@장비목록@@");
             List<WebElement> eq_txt=driver.findElements(By.className("eq_txt"));
@@ -113,9 +116,23 @@ public class SearchTest {
             webElement.click();
             webElement = driver.findElement(By.xpath("//*[@id=\"container-common\"]/div/div/div[3]/div[3]/div[2]/div[4]"));
             System.out.println(webElement.getText());
-           
-            
-            
+          
+            /*
+            webElement = driver.findElement(By.xpath("//*[@id=\"container-common\"]/div/div/div[3]/div[1]/div[2]"));
+            System.out.println(webElement.getText());
+            List<WebElement> eqipList = new ArrayList<WebElement>();
+            Actions action = new Actions(driver);
+            eqipList = driver.findElements(By.className("wrap"));
+            for (int i = 0 ; i< eqipList.size() ;i++) {
+//            		action.moveToElement(eqipList.get(i)).build().perform();
+//            		webElement=driver.findElement(By.xpath("/html/body/div[3]"));
+            		webElement.click();
+            		System.out.println(webElement.getText());
+            		Thread.sleep(1000);
+            	
+            	
+            }
+            */
 
         } catch (Exception e) {
             
@@ -123,7 +140,8 @@ public class SearchTest {
         
         } finally {
  
-            //driver.close();
+            //driver.close(); //현재창?자식창? 닫기
+        	//driver.quit();  //모든 창 닫고 끝내기
         }
  
     }
